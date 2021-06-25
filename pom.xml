@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hotelbooking</name>
 	<description>Hotel booking System</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
