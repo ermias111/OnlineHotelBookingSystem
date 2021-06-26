@@ -4,8 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Table(name="hotel")
 @Entity
-public class Hotel implements Serializable {
+public class Hotel extends Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,6 +27,28 @@ public class Hotel implements Serializable {
     @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    public Hotel(){}
+
+    public Hotel(String name, String description, String photoUrl,Address address) {
+        this.name = name;
+        this.description = description;
+        this.photoUrl = photoUrl;
+        this.address = address;
+      //  this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", photoUrl='" + photoUrl + '\'' +
+                ", address=" + address +
+                ", account=" + account +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -91,16 +114,5 @@ public class Hotel implements Serializable {
     public void setAccount(Account account) {
         this.account = account;
     }
-
-
-    public Hotel(Integer id, String name, String description, String photoUrl,Address address, Account account) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.photoUrl = photoUrl;
-        this.address = address;
-        this.account = account;
-    }
-
 
 }

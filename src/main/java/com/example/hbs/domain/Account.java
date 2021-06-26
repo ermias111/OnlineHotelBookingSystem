@@ -3,19 +3,18 @@ package com.example.hbs.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "account")
-public class Account implements Serializable {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "username")
     private String username;
@@ -37,28 +36,29 @@ public class Account implements Serializable {
     }
 
 
-    public Account(Long id, String username, String password, List<Role> roles) {
-        this.id = id;
+    public Account(String username, String password, Role role) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.roles = Arrays.asList(role);
 //        this.created_at = new Date();
 //        this.last_update = new Date();
     }
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns
-            = @JoinColumn(name = "account_id",
+    @JoinTable(name = "account_role", joinColumns
+            = @JoinColumn(name = "user_id",
             referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id",
                     referencedColumnName = "id"))
 
-    public Long getId() {
+    private List<Role> roles;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -102,6 +102,5 @@ public class Account implements Serializable {
         this.roles = roles;
     }
 
-    private List<Role> roles;
 
 }

@@ -1,10 +1,13 @@
 package com.example.hbs.domain;
 
-import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
-public class Role implements GrantedAuthority {
+
+@Entity
+@Table(name="role")
+public class Role  {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,10 +19,10 @@ public class Role implements GrantedAuthority {
     @Column(name="description")
     private String description;
 
-    @Override
-    public String getAuthority() {
-        return roleName;
-    }
+//    @Override
+//    public String getAuthority() {
+//        return roleName;
+//    }
     public Long getId() {
         return id;
     }
