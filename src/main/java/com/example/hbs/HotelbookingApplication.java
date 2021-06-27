@@ -1,27 +1,39 @@
 package com.example.hbs;
 
+import com.example.hbs.domain.Account;
 import com.example.hbs.domain.Address;
+import com.example.hbs.domain.Role;
+import com.example.hbs.service.AccountService;
 import com.example.hbs.service.AddressService;
 import com.example.hbs.service.HotelService;
+import com.example.hbs.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Optional;
+
 @SpringBootApplication
 public class HotelbookingApplication implements CommandLineRunner {
 
-	//@Autowired
+	@Autowired
 	private HotelService hotelService;
 
-	//@Autowired
+	@Autowired
 	private AddressService addressService;
 
 	@Autowired
-	public HotelbookingApplication(HotelService hotelService, AddressService addressService) {
-		this.hotelService = hotelService;
-		this.addressService = addressService;
-	}
+	private RoleService roleService;
+
+	@Autowired
+	private AccountService accountService;
+
+//	@Autowired
+//	public HotelbookingApplication(HotelService hotelService, AddressService addressService) {
+//		this.hotelService = hotelService;
+//		this.addressService = addressService;
+//	}
 
 
 
@@ -32,8 +44,12 @@ public class HotelbookingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		Role role = roleService.createRole("ROLE_ADMIN", "Administration");
 		Address address = addressService.createRAddress( 1,"1000 N st", "ddff","dfsd","dff","fd");
-		hotelService.createHotel("Hotel x", "hotel xxx", "//htsddds",address);
+		//Optional<Account> account = accountService.signup("ray", "r@y100");
+		hotelService.createHotel("ray", "r@y100", role, "Hotel x", "hotel xxx", "//htsddds",address);
+		hotelService.createHotel("ray2", "r@y100", role, "Hotel HBS", "hotel hbs", "//hbs",address);
+
 	}
 
 }

@@ -14,8 +14,8 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public Room createRoom(Integer id, String description, String photoUrl, Double price, Boolean vacant, Hotel hotel, RoomType roomType){
-        return roomRepository.findById(id).orElse(roomRepository.save(new Room(id,description,photoUrl,price,vacant,hotel,roomType)));
+    public Room createRoom(Integer id , Integer room_number, Boolean vacant, Hotel hotel, RoomType roomType){
+        return roomRepository.findById(id).orElse(roomRepository.save(new Room(room_number, vacant, hotel, roomType)));
     }
 
     /**

@@ -10,15 +10,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 2000)
-    private String description;
-
     @Column
-    private String photoUrl;
-
-    @Column
-    private Double price;
-
+    private  Integer room_number;
+    
     @Column
     private Boolean vacant;
 
@@ -30,11 +24,10 @@ public class Room {
     @JoinColumn(name = "roomType_id")
     private RoomType roomType;
 
-    public Room(Integer id, String description, String photoUrl, Double price, Boolean vacant, Hotel hotel, RoomType roomType) {
-        this.id = id;
-        this.description = description;
-        this.photoUrl = photoUrl;
-        this.price = price;
+    public Room(){}
+
+    public Room(Integer room_number, Boolean vacant, Hotel hotel, RoomType roomType) {
+        this.room_number = room_number;
         this.vacant = vacant;
         this.hotel = hotel;
         this.roomType = roomType;
@@ -48,28 +41,12 @@ public class Room {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getRoom_number() {
+        return room_number;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setRoom_number(Integer room_number) {
+        this.room_number = room_number;
     }
 
     public Boolean getVacant() {
@@ -97,14 +74,23 @@ public class Room {
     }
 
     @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", room_number=" + room_number +
+                ", vacant=" + vacant +
+                ", hotel=" + hotel +
+                ", roomType=" + roomType +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
         return Objects.equals(id, room.id) &&
-                Objects.equals(description, room.description) &&
-                Objects.equals(photoUrl, room.photoUrl) &&
-                Objects.equals(price, room.price) &&
+                Objects.equals(room_number, room.room_number) &&
                 Objects.equals(vacant, room.vacant) &&
                 Objects.equals(hotel, room.hotel) &&
                 Objects.equals(roomType, room.roomType);
@@ -112,19 +98,6 @@ public class Room {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, photoUrl, price, vacant, hotel, roomType);
-    }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", photoUrl='" + photoUrl + '\'' +
-                ", price=" + price +
-                ", vacant=" + vacant +
-                ", hotel=" + hotel +
-                ", roomType=" + roomType +
-                '}';
+        return Objects.hash(id, room_number, vacant, hotel, roomType);
     }
 }

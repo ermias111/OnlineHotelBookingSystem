@@ -17,36 +17,24 @@ public class RoomType {
     @Column(length = 2000)
     private String description;
 
-    public RoomType(){}
+    @Column
+    private String photoUrl;
 
-    public RoomType(Integer id, String type, String description) {
-        this.id = id;
+    @Column
+    private Double price;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hottel;
+
+    public  RoomType(){}
+
+    public RoomType(String type, String description, String photoUrl, Double price, Hotel hottel) {
         this.type = type;
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RoomType roomType = (RoomType) o;
-        return Objects.equals(id, roomType.id) &&
-                Objects.equals(type, roomType.type) &&
-                Objects.equals(description, roomType.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, type, description);
-    }
-
-    @Override
-    public String toString() {
-        return "RoomType{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        this.photoUrl = photoUrl;
+        this.price = price;
+        this.hottel = hottel;
     }
 
     public Integer getId() {
@@ -71,5 +59,59 @@ public class RoomType {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Hotel getHottel() {
+        return hottel;
+    }
+
+    public void setHottel(Hotel hottel) {
+        this.hottel = hottel;
+    }
+
+    @Override
+    public String toString() {
+        return "RoomType{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", photoUrl='" + photoUrl + '\'' +
+                ", price=" + price +
+                ", hottel=" + hottel +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoomType roomType = (RoomType) o;
+        return Objects.equals(id, roomType.id) &&
+                Objects.equals(type, roomType.type) &&
+                Objects.equals(description, roomType.description) &&
+                Objects.equals(photoUrl, roomType.photoUrl) &&
+                Objects.equals(price, roomType.price) &&
+                Objects.equals(hottel, roomType.hottel);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, type, description, photoUrl, price, hottel);
     }
 }

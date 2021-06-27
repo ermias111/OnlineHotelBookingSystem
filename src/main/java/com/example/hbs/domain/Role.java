@@ -3,11 +3,12 @@ package com.example.hbs.domain;
 //import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name="role")
-public class Role  {
+public class Role {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +20,14 @@ public class Role  {
     @Column(name="description")
     private String description;
 
-//    @Override
+    public Role(){}
+
+    public Role(String roleName, String description) {
+        this.roleName = roleName;
+        this.description = description;
+    }
+
+    //    @Override
 //    public String getAuthority() {
 //        return roleName;
 //    }
