@@ -17,7 +17,7 @@ public class Hotel extends Account implements Serializable {
     private String photoUrl;
 
     @ManyToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "addressId")
     private Address address;
 
 
@@ -35,6 +35,7 @@ public class Hotel extends Account implements Serializable {
 
 
     public Hotel(String username, String password, Role role,String name, String description, String photoUrl, Address address) {
+        super(username, password, role);
         this.name = name;
         this.description = description;
         this.photoUrl = photoUrl;

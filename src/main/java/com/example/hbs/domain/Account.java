@@ -22,6 +22,10 @@ public class Account {
     @JsonIgnore
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "roleId")
+    private Role roles;
+
     @Temporal(TemporalType.DATE)
     private Date created_at;
 
@@ -38,7 +42,7 @@ public class Account {
     public Account(String username, String password, Role role) {
         this.username = username;
         this.password = password;
-        this.roles = Arrays.asList(role);
+//        this.roles = Arrays.asList(role);
 //        this.created_at = new Date();
 //        this.last_update = new Date();
     }
@@ -51,7 +55,6 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "role_id",
                     referencedColumnName = "id"))
 
-    private List<Role> roles;
 
     public Integer getId() {
         return id;
@@ -93,11 +96,11 @@ public class Account {
         this.last_update = last_update;
     }
 
-    public List<Role> getRoles() {
+    public Role getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Role roles) {
         this.roles = roles;
     }
 

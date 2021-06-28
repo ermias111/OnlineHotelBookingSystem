@@ -16,7 +16,7 @@ public class Customer extends Account implements Serializable{
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "addressId")
     private Address address;
 
     public Customer() {

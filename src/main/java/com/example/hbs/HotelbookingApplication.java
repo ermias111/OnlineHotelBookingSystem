@@ -1,17 +1,16 @@
 package com.example.hbs;
 
-import com.example.hbs.domain.Account;
-import com.example.hbs.domain.Address;
-import com.example.hbs.domain.Role;
-import com.example.hbs.service.AccountService;
-import com.example.hbs.service.AddressService;
-import com.example.hbs.service.HotelService;
-import com.example.hbs.service.RoleService;
+import com.example.hbs.domain.*;
+import com.example.hbs.repo.CustomerRepository;
+import com.example.hbs.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -29,6 +28,21 @@ public class HotelbookingApplication implements CommandLineRunner {
 	@Autowired
 	private AccountService accountService;
 
+	@Autowired
+	private RoomService roomService;
+
+	@Autowired
+	private RoomTypeService roomTypeService;
+
+	@Autowired
+	private CustomerService customerService;
+
+	@Autowired
+	private BookingService bookingService;
+
+	@Autowired
+	private PaymentService paymentService;
+
 //	@Autowired
 //	public HotelbookingApplication(HotelService hotelService, AddressService addressService) {
 //		this.hotelService = hotelService;
@@ -44,11 +58,26 @@ public class HotelbookingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Role role = roleService.createRole("ROLE_ADMIN", "Administration");
-		Address address = addressService.createRAddress( 1,"1000 N st", "ddff","dfsd","dff","fd");
-		//Optional<Account> account = accountService.signup("ray", "r@y100");
-		hotelService.createHotel("ray", "r@y100", role, "Hotel x", "hotel xxx", "//htsddds",address);
-		hotelService.createHotel("ray2", "r@y100", role, "Hotel HBS", "hotel hbs", "//hbs",address);
+
+		Address cAddress = addressService.createRAddress("Julia 4th st", "TX","Forney","43457","+123...");
+		Address hAddress = addressService.createRAddress("1000 4th st", "IA","Fairfield","52557","+641...");
+		Role hrole = roleService.createRole("Hotel", "HotelRole");
+		Role crole = roleService.createRole("Customer", "CustomerRole");
+		Hotel hotel = hotelService.createHotel("hilton12", "1234", hrole, "Hilton", "5 star", "img/1.jpg",hAddress);
+		Customer customer = customerService.createCustomer("jj", "1234", crole,"James", "Joseph", "j@gmail.com", cAddress);
+		RoomType standard = roomTypeService.createRoomType("Standard", "1 master bedroom"
+				, "img/s.jpg", 300.00, hotel);
+		RoomType king = roomTypeService.createRoomType("King", "2 master bedroom"
+				, "img/e.jpg", 400.00, hotel);
+
+		Room r1 = roomService.createRoom(100, true, hotel, standard);
+		Room r2 = roomService.createRoom(101, true, hotel, king);
+		Room r3 = roomService.createRoom(102, true, hotel, standard);
+
+		Payment payment = paymentService.createPayment(customer, 123123123878976L, new Date(2021, 9, 2), 1000.0);
+		bookingService.createBooking(new Date(2021, 9, 1), new Date(2021, 9, 4)
+				                   , customer, Arrays.asList(r1, r2, r3), payment);
+
 
 	}
 

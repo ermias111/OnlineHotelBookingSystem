@@ -1,7 +1,6 @@
 package com.example.hbs.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -11,23 +10,23 @@ public class Room {
     private Integer id;
 
     @Column
-    private  Integer room_number;
+    private  Integer roomNumber;
     
     @Column
     private Boolean vacant;
 
     @ManyToOne
-    @JoinColumn(name = "hotel_id")
+    @JoinColumn(name = "hotelId")
     private Hotel hotel;
 
     @ManyToOne
-    @JoinColumn(name = "roomType_id")
+    @JoinColumn(name = "roomTypeId")
     private RoomType roomType;
 
     public Room(){}
 
-    public Room(Integer room_number, Boolean vacant, Hotel hotel, RoomType roomType) {
-        this.room_number = room_number;
+    public Room(Integer roomNumber, Boolean vacant, Hotel hotel, RoomType roomType) {
+        this.roomNumber = roomNumber;
         this.vacant = vacant;
         this.hotel = hotel;
         this.roomType = roomType;
@@ -41,12 +40,12 @@ public class Room {
         this.id = id;
     }
 
-    public Integer getRoom_number() {
-        return room_number;
+    public Integer getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoom_number(Integer room_number) {
-        this.room_number = room_number;
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public Boolean getVacant() {
@@ -77,7 +76,7 @@ public class Room {
     public String toString() {
         return "Room{" +
                 "id=" + id +
-                ", room_number=" + room_number +
+                ", room_number=" + roomNumber +
                 ", vacant=" + vacant +
                 ", hotel=" + hotel +
                 ", roomType=" + roomType +
@@ -90,7 +89,7 @@ public class Room {
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
         return Objects.equals(id, room.id) &&
-                Objects.equals(room_number, room.room_number) &&
+                Objects.equals(roomNumber, room.roomNumber) &&
                 Objects.equals(vacant, room.vacant) &&
                 Objects.equals(hotel, room.hotel) &&
                 Objects.equals(roomType, room.roomType);
@@ -98,6 +97,6 @@ public class Room {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, room_number, vacant, hotel, roomType);
+        return Objects.hash(id, roomNumber, vacant, hotel, roomType);
     }
 }

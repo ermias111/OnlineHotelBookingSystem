@@ -18,8 +18,8 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public Address createRAddress(Integer id, String address, String district, String city, String postalCode, String phone){
-        return addressRepository.findById(id).orElse(addressRepository.save(new Address(address,district,city,postalCode,phone)));
+    public Address createRAddress(String street, String district, String city, String postalCode, String phone){
+        return addressRepository.findByPhone(phone).orElse(addressRepository.save(new Address(street,district,city,postalCode,phone)));
     }
 
     /**
