@@ -13,7 +13,7 @@ public class Feedback implements Serializable {
     @Column
     private String comment;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
 

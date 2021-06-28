@@ -40,8 +40,9 @@ public class Booking implements Serializable {
 
     public Booking(){}
 
-    public Booking(Date created_at, Date check_in, Date check_out, Customer customer, List<Room> rooms, Payment payment) {
-        this.created_at = created_at;
+
+    public Booking(Date check_in, Date check_out, Customer customer, List<Room> rooms, Payment payment) {
+        this.created_at = new Date(System.currentTimeMillis());
         this.check_in = check_in;
         this.check_out = check_out;
         this.customer = customer;

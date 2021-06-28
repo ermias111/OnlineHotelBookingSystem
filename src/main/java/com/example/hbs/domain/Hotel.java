@@ -20,10 +20,7 @@ public class Hotel extends Account implements Serializable {
     @OneToOne
     @JoinColumn(name = "addressId")
     private Address address;
-//
-//    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-//    private List<RoomType> roomTypes;
-
+    
     public  Hotel(){}
 
 
