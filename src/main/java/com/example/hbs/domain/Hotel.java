@@ -2,6 +2,7 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,11 +17,12 @@ public class Hotel extends Account implements Serializable {
     @Column
     private String photoUrl;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "addressId")
     private Address address;
 
-
+//    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+//    private List<RoomType> roomTypes;
 
 
     public  Hotel(){}

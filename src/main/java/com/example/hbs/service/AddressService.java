@@ -23,7 +23,7 @@ public class AddressService {
     }
 
     /**
-     * Lookup All Tour packages
+     * Lookup All Addresses
      *
      * @return
      */

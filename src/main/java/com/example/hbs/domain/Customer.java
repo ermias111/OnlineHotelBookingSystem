@@ -15,26 +15,25 @@ public class Customer extends Account implements Serializable{
     @Column
     private String email;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "addressId")
     private Address address;
 
     public Customer() {
     }
 
-    public Customer(String firstname, String lastname, String email, Address address) {
+    public Customer(String firstname, String lastname, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.address = address;
+//        this.address = address;
     }
 
-    public Customer(String username, String password, Role role, String firstname, String lastname, String email, Address address) {
+    public Customer(String username, String password, Role role, String firstname, String lastname, String email) {
         super(username, password, role);
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.address = address;
     }
 
     public String getFirstname() {
