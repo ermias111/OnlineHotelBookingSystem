@@ -29,14 +29,6 @@ public class HotelbookingApplication implements CommandLineRunner {
 	@Autowired
 	private AccountService accountService;
 
-//	@Autowired
-//	public HotelbookingApplication(HotelService hotelService, AddressService addressService) {
-//		this.hotelService = hotelService;
-//		this.addressService = addressService;
-//	}
-
-
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(HotelbookingApplication.class, args);
@@ -47,8 +39,8 @@ public class HotelbookingApplication implements CommandLineRunner {
 		Role role = roleService.createRole("ROLE_ADMIN", "Administration");
 		Address address = addressService.createRAddress( 1,"1000 N st", "ddff","dfsd","dff","fd");
 		//Optional<Account> account = accountService.signup("ray", "r@y100");
-		hotelService.createHotel("ray", "r@y100", role, "Hotel x", "hotel xxx", "//htsddds",address);
-		hotelService.createHotel("ray2", "r@y100", role, "Hotel HBS", "hotel hbs", "//hbs",address);
+		//hotelService.createHotel("ray", "r@y100", role, "Hotel x", "hotel xxx", "//htsddds",address);
+		//hotelService.createHotel("ray2", "r@y100", role, "Hotel HBS", "hotel hbs", "//hbs",address);
 
 	}
 

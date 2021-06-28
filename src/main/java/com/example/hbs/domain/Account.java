@@ -13,6 +13,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "account_id")
     private Integer id;
 
     @Column(name = "username")
@@ -28,30 +29,25 @@ public class Account {
     @Temporal(TemporalType.DATE)
     private Date last_update;
 
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "account_role",
+            joinColumns = {@JoinColumn(name = "account_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private List<Role> roles;
+
     /**
      * Default Constructor.
      */
     protected Account() {
     }
 
-
     public Account(String username, String password, Role role) {
         this.username = username;
         this.password = password;
         this.roles = Arrays.asList(role);
-//        this.created_at = new Date();
-//        this.last_update = new Date();
     }
-
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "account_role", joinColumns
-            = @JoinColumn(name = "account_id",
-            referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id",
-                    referencedColumnName = "id"))
-
-    private List<Role> roles;
 
     public Integer getId() {
         return id;

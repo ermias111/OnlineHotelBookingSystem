@@ -5,6 +5,8 @@ import com.example.hbs.repo.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RoomService {
     private  RoomRepository roomRepository;
@@ -14,8 +16,8 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public Room createRoom(Integer id , Integer room_number, Boolean vacant, Hotel hotel, RoomType roomType){
-        return roomRepository.findById(id).orElse(roomRepository.save(new Room(room_number, vacant, hotel, roomType)));
+    public Room createRoom(Integer id , Integer room_number, Boolean vacant, Hotel hotel, RoomType roomType, List<Booking> bookings){
+        return roomRepository.findById(id).orElse(roomRepository.save(new Room(room_number, vacant, hotel, roomType,bookings)));
     }
 
     /**

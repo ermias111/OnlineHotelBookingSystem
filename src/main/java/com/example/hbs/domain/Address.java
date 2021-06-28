@@ -9,6 +9,7 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
     private Integer id;
 
     @Column
@@ -32,7 +33,6 @@ public class Address implements Serializable {
     public Address(){}
 
     public Address(String address, String district, String city, String postalCode, String phone) {
-        //this.address_id = address_id;
         this.address = address;
         this.district = district;
         this.city = city;
@@ -40,45 +40,21 @@ public class Address implements Serializable {
         this.phone = phone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address1 = (Address) o;
-        return Objects.equals(id, address1.id) &&
-                Objects.equals(address, address1.address) &&
-                Objects.equals(address2, address1.address2) &&
-                Objects.equals(district, address1.district) &&
-                Objects.equals(city, address1.city) &&
-                Objects.equals(postalCode, address1.postalCode) &&
-                Objects.equals(phone, address1.phone);
+    public Address(String address, String address2, String district, String city, String postalCode, String phone) {
+        this.address = address;
+        this.address2 = address2;
+        this.district = district;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.phone = phone;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, address, address2, district, city, postalCode, phone);
-    }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "address_id=" + id +
-                ", address='" + address + '\'' +
-                ", address2='" + address2 + '\'' +
-                ", district='" + district + '\'' +
-                ", city='" + city + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
-
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer address_id) {
-        this.id = address_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -127,5 +103,37 @@ public class Address implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", district='" + district + '\'' +
+                ", city='" + city + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address1 = (Address) o;
+        return Objects.equals(id, address1.id) &&
+                Objects.equals(address, address1.address) &&
+                Objects.equals(address2, address1.address2) &&
+                Objects.equals(district, address1.district) &&
+                Objects.equals(city, address1.city) &&
+                Objects.equals(postalCode, address1.postalCode) &&
+                Objects.equals(phone, address1.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, address, address2, district, city, postalCode, phone);
     }
 }

@@ -2,6 +2,7 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,29 +17,30 @@ public class Hotel extends Account implements Serializable {
     @Column
     private String photoUrl;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
-
-
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    private List<Room> rooms;
 
     public  Hotel(){}
 
-
-    public Hotel(String name, String description, String photoUrl, Address address) {
+    public Hotel(String name, String description, String photoUrl, Address address, List<Room> rooms) {
         this.name = name;
         this.description = description;
         this.photoUrl = photoUrl;
         this.address = address;
+        this.rooms = rooms;
     }
 
-
-    public Hotel(String username, String password, Role role,String name, String description, String photoUrl, Address address) {
+    public Hotel(String username, String password, Role role, String name, String description, String photoUrl, Address address, List<Room> rooms) {
+        super(username, password, role);
         this.name = name;
         this.description = description;
         this.photoUrl = photoUrl;
         this.address = address;
+        this.rooms = rooms;
     }
 
     public String getName() {
@@ -73,6 +75,14 @@ public class Hotel extends Account implements Serializable {
         this.address = address;
     }
 
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -80,6 +90,7 @@ public class Hotel extends Account implements Serializable {
                 ", description='" + description + '\'' +
                 ", photoUrl='" + photoUrl + '\'' +
                 ", address=" + address +
+                ", rooms=" + rooms +
                 '}';
     }
 
@@ -91,11 +102,12 @@ public class Hotel extends Account implements Serializable {
         return Objects.equals(name, hotel.name) &&
                 Objects.equals(description, hotel.description) &&
                 Objects.equals(photoUrl, hotel.photoUrl) &&
-                Objects.equals(address, hotel.address) ;
+                Objects.equals(address, hotel.address) &&
+                Objects.equals(rooms, hotel.rooms);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, photoUrl, address);
+        return Objects.hash(name, description, photoUrl, address, rooms);
     }
 }

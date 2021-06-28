@@ -2,6 +2,7 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,7 @@ public class RoomType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "room_type_id")
     private Integer id;
 
     @Column
@@ -25,16 +27,20 @@ public class RoomType {
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
-    private Hotel hottel;
+    private Hotel hotel;
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+    private List<Room> rooms;
 
     public  RoomType(){}
 
-    public RoomType(String type, String description, String photoUrl, Double price, Hotel hottel) {
+    public RoomType(String type, String description, String photoUrl, Double price, Hotel hotel, List<Room> rooms) {
         this.type = type;
         this.description = description;
         this.photoUrl = photoUrl;
         this.price = price;
-        this.hottel = hottel;
+        this.hotel = hotel;
+        this.rooms = rooms;
     }
 
     public Integer getId() {
@@ -77,12 +83,20 @@ public class RoomType {
         this.price = price;
     }
 
-    public Hotel getHottel() {
-        return hottel;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setHottel(Hotel hottel) {
-        this.hottel = hottel;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @Override
@@ -93,7 +107,8 @@ public class RoomType {
                 ", description='" + description + '\'' +
                 ", photoUrl='" + photoUrl + '\'' +
                 ", price=" + price +
-                ", hottel=" + hottel +
+                ", hotel=" + hotel +
+                ", rooms=" + rooms +
                 '}';
     }
 
@@ -107,11 +122,12 @@ public class RoomType {
                 Objects.equals(description, roomType.description) &&
                 Objects.equals(photoUrl, roomType.photoUrl) &&
                 Objects.equals(price, roomType.price) &&
-                Objects.equals(hottel, roomType.hottel);
+                Objects.equals(hotel, roomType.hotel) &&
+                Objects.equals(rooms, roomType.rooms);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, description, photoUrl, price, hottel);
+        return Objects.hash(id, type, description, photoUrl, price, hotel, rooms);
     }
 }

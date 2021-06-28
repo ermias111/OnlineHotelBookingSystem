@@ -10,6 +10,7 @@ public class Booking implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "booking_id")
     private Integer id;
 
     @Column
@@ -17,11 +18,9 @@ public class Booking implements Serializable {
     private Date created_at;
 
     @Column
-   // @Temporal(TemporalType.DATE)
     private Date check_in;
 
     @Column
-    //@Temporal(TemporalType.DATE)
     private Date check_out;
 
     @ManyToOne
@@ -31,6 +30,8 @@ public class Booking implements Serializable {
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
+
+    public Booking(){}
 
     public Booking(Date created_at, Date check_in, Date check_out, Customer customer, Room room) {
         this.created_at = created_at;
