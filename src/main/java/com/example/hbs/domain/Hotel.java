@@ -17,30 +17,46 @@ public class Hotel extends Account implements Serializable {
     @Column
     private String photoUrl;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @OneToOne
+    @JoinColumn(name = "addressId")
     private Address address;
-
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
-    private List<Room> rooms;
+//
+//    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+//    private List<RoomType> roomTypes;
 
     public  Hotel(){}
 
-    public Hotel(String name, String description, String photoUrl, Address address, List<Room> rooms) {
+
+    public Hotel(String name, String description, String photoUrl, Address address) {
         this.name = name;
         this.description = description;
         this.photoUrl = photoUrl;
         this.address = address;
-        this.rooms = rooms;
     }
 
-    public Hotel(String username, String password, Role role, String name, String description, String photoUrl, Address address, List<Room> rooms) {
+//    public Hotel(String name, String description, String photoUrl, Address address, List<RoomType> roomTypes) {
+//        this.name = name;
+//        this.description = description;
+//        this.photoUrl = photoUrl;
+//        this.address = address;
+//        this.roomTypes = roomTypes;
+//    }
+//
+//    public Hotel(String username, String password, Role role, String name, String description, String photoUrl, Address address, List<RoomType> roomTypes) {
+//        super(username, password, role);
+//        this.name = name;
+//        this.description = description;
+//        this.photoUrl = photoUrl;
+//        this.address = address;
+//        this.roomTypes = roomTypes;
+//    }
+
+    public Hotel(String username, String password, Role role, String name, String description, String photoUrl, Address address) {
         super(username, password, role);
         this.name = name;
         this.description = description;
         this.photoUrl = photoUrl;
         this.address = address;
-        this.rooms = rooms;
     }
 
     public String getName() {
@@ -75,14 +91,6 @@ public class Hotel extends Account implements Serializable {
         this.address = address;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
-
     @Override
     public String toString() {
         return "Hotel{" +
@@ -90,7 +98,6 @@ public class Hotel extends Account implements Serializable {
                 ", description='" + description + '\'' +
                 ", photoUrl='" + photoUrl + '\'' +
                 ", address=" + address +
-                ", rooms=" + rooms +
                 '}';
     }
 
@@ -102,12 +109,12 @@ public class Hotel extends Account implements Serializable {
         return Objects.equals(name, hotel.name) &&
                 Objects.equals(description, hotel.description) &&
                 Objects.equals(photoUrl, hotel.photoUrl) &&
-                Objects.equals(address, hotel.address) &&
-                Objects.equals(rooms, hotel.rooms);
+                Objects.equals(address, hotel.address) ;
+//                Objects.equals(roomTypes, hotel.roomTypes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, photoUrl, address, rooms);
+        return Objects.hash(name, description, photoUrl, address);
     }
 }

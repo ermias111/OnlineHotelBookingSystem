@@ -16,31 +16,29 @@ public class Customer extends Account implements Serializable{
     @Column
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @ManyToOne
+    @JoinColumn(name = "addressId")
     private Address address;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Booking> bookings;
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+//    private List<Booking> bookings;
 
     public Customer() {
     }
 
-    public Customer(String firstname, String lastname, String email, Address address, List<Booking> bookings) {
+    public Customer(String firstname, String lastname, String email, Address address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.address = address;
-        this.bookings = bookings;
     }
 
-    public Customer(String username, String password, Role role, String firstname, String lastname, String email, Address address, List<Booking> bookings) {
+    public Customer(String username, String password, Role role, String firstname, String lastname, String email, Address address) {
         super(username, password, role);
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.address = address;
-        this.bookings = bookings;
     }
 
     public String getFirstname() {
@@ -75,13 +73,13 @@ public class Customer extends Account implements Serializable{
         this.address = address;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
+//    public List<Booking> getBookings() {
+//        return bookings;
+//    }
+//
+//    public void setBookings(List<Booking> bookings) {
+//        this.bookings = bookings;
+//    }
 
     @Override
     public String toString() {
@@ -90,7 +88,6 @@ public class Customer extends Account implements Serializable{
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", address=" + address +
-                ", bookings=" + bookings +
                 '}';
     }
 
@@ -102,12 +99,11 @@ public class Customer extends Account implements Serializable{
         return Objects.equals(firstname, customer.firstname) &&
                 Objects.equals(lastname, customer.lastname) &&
                 Objects.equals(email, customer.email) &&
-                Objects.equals(address, customer.address) &&
-                Objects.equals(bookings, customer.bookings);
+                Objects.equals(address, customer.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstname, lastname, email, address, bookings);
+        return Objects.hash(firstname, lastname, email, address);
     }
 }

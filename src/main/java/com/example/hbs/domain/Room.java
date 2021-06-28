@@ -1,42 +1,36 @@
 package com.example.hbs.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_id")
     private Integer id;
 
     @Column
-    private  Integer room_number;
+    private  Integer roomNumber;
 
     @Column
     private Boolean vacant;
 
     @ManyToOne
-    @JoinColumn(name = "hotel_id")
+    @JoinColumn(name = "hotelId")
     private Hotel hotel;
 
     @ManyToOne
-    @JoinColumn(name = "room_type_id")
+    @JoinColumn(name = "roomTypeId")
     private RoomType roomType;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    List<Booking> bookings;
 
     public Room(){}
 
-    public Room(Integer room_number, Boolean vacant, Hotel hotel, RoomType roomType, List<Booking> bookings) {
-        this.room_number = room_number;
+    public Room(Integer roomNumber, Boolean vacant, Hotel hotel, RoomType roomType) {
+        this.roomNumber = roomNumber;
         this.vacant = vacant;
         this.hotel = hotel;
         this.roomType = roomType;
-        this.bookings = bookings;
     }
 
     public Integer getId() {
@@ -47,12 +41,12 @@ public class Room {
         this.id = id;
     }
 
-    public Integer getRoom_number() {
-        return room_number;
+    public Integer getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoom_number(Integer room_number) {
-        this.room_number = room_number;
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public Boolean getVacant() {
@@ -79,23 +73,14 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
     @Override
     public String toString() {
         return "Room{" +
                 "id=" + id +
-                ", room_number=" + room_number +
+                ", roomNumber=" + roomNumber +
                 ", vacant=" + vacant +
                 ", hotel=" + hotel +
                 ", roomType=" + roomType +
-                ", bookings=" + bookings +
                 '}';
     }
 
@@ -105,15 +90,14 @@ public class Room {
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
         return Objects.equals(id, room.id) &&
-                Objects.equals(room_number, room.room_number) &&
+                Objects.equals(roomNumber, room.roomNumber) &&
                 Objects.equals(vacant, room.vacant) &&
                 Objects.equals(hotel, room.hotel) &&
-                Objects.equals(roomType, room.roomType) &&
-                Objects.equals(bookings, room.bookings);
+                Objects.equals(roomType, room.roomType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, room_number, vacant, hotel, roomType, bookings);
+        return Objects.hash(id, roomNumber, vacant, hotel, roomType);
     }
 }

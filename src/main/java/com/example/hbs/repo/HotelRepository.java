@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HotelRepository extends CrudRepository<Hotel, Integer> {
-
-    Optional<Hotel> findById(String name);
-
     List<Hotel> findByAddressCity(String name);
+    List<Hotel> findByAddress_District(String district);
+
 }

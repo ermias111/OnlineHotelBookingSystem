@@ -4,6 +4,7 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -12,7 +13,6 @@ public class Role {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
     private Long id;
 
     @Column(name="role_name")
@@ -20,6 +20,10 @@ public class Role {
 
     @Column(name="description")
     private String description;
+
+//    @OneToMany
+//    @JoinColumn(name = "accountId")
+//    private List<Account> accounts;
 
     public Role(){}
 

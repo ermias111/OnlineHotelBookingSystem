@@ -3,9 +3,8 @@ package com.example.hbs.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Arrays;
+import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -23,19 +22,16 @@ public class Account {
     @JsonIgnore
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "roleId")
+    private Role role;
+
     @Temporal(TemporalType.DATE)
     private Date created_at;
 
     @Temporal(TemporalType.DATE)
     private Date last_update;
 
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "account_role",
-            joinColumns = {@JoinColumn(name = "account_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private List<Role> roles;
 
     /**
      * Default Constructor.
@@ -46,7 +42,10 @@ public class Account {
     public Account(String username, String password, Role role) {
         this.username = username;
         this.password = password;
-        this.roles = Arrays.asList(role);
+        this.role = role;
+        this.created_at = new Date(System.currentTimeMillis());
+        this.last_update = new Date(System.currentTimeMillis());
+
     }
 
     public Integer getId() {
@@ -89,13 +88,11 @@ public class Account {
         this.last_update = last_update;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
-
-
 }
