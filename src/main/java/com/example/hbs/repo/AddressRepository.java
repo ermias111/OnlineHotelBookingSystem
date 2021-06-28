@@ -3,6 +3,8 @@ package com.example.hbs.repo;
 import com.example.hbs.domain.Address;
 import org.springframework.data.repository.CrudRepository;
 
-public interface AddressRepository extends CrudRepository<Address, Integer> {
+import java.util.Optional;
 
+public interface AddressRepository extends CrudRepository<Address, Integer> {
+    Optional<Address> findByPhone(String phone);
 }

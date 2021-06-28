@@ -3,6 +3,7 @@ package com.example.hbs.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,27 +18,47 @@ public class Booking implements Serializable {
     private Date created_at;
 
     @Column
-   // @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date check_in;
 
     @Column
-    //@Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date check_out;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customerId")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
+    @OneToMany
+    @JoinColumn(name = "roomId")
+    private List<Room> rooms;
 
-    public Booking(Date created_at, Date check_in, Date check_out, Customer customer, Room room) {
-        this.created_at = created_at;
+    @OneToOne
+    @JoinColumn(name = "paymentId")
+    private Payment payment;
+
+    public Booking(){}
+
+    public Booking(Date check_in, Date check_out, Customer customer, List<Room> rooms, Payment payment) {
+//        this.created_at = created_at;
         this.check_in = check_in;
         this.check_out = check_out;
         this.customer = customer;
-        this.room = room;
+        this.rooms = rooms;
+        this.payment = payment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return Objects.equals(created_at, booking.created_at) && Objects.equals(check_in, booking.check_in) && Objects.equals(check_out, booking.check_out) && Objects.equals(customer, booking.customer) && Objects.equals(rooms, booking.rooms) && Objects.equals(payment, booking.payment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(check_in, check_out, customer, rooms, payment);
     }
 
     public Integer getId() {
@@ -80,41 +101,19 @@ public class Booking implements Serializable {
         this.customer = customer;
     }
 
-    public Room getRoom() {
-        return room;
+    public List<Room> getRooms() {
+        return rooms;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "id=" + id +
-                ", created_at=" + created_at +
-                ", check_in=" + check_in +
-                ", check_out=" + check_out +
-                ", customer=" + customer +
-                ", room=" + room +
-                '}';
+    public Payment getPayment() {
+        return payment;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return Objects.equals(id, booking.id) &&
-                Objects.equals(created_at, booking.created_at) &&
-                Objects.equals(check_in, booking.check_in) &&
-                Objects.equals(check_out, booking.check_out) &&
-                Objects.equals(customer, booking.customer) &&
-                Objects.equals(room, booking.room);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, created_at, check_in, check_out, customer, room);
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }
