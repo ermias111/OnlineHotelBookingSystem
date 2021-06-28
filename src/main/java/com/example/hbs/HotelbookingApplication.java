@@ -64,7 +64,7 @@ public class HotelbookingApplication implements CommandLineRunner {
 		Role hrole = roleService.createRole("Hotel", "HotelRole");
 		Role crole = roleService.createRole("Customer", "CustomerRole");
 		Hotel hotel = hotelService.createHotel("hilton12", "1234", hrole, "Hilton", "5 star", "img/1.jpg",hAddress);
-		Customer customer = customerService.createCustomer("jj", "1234", crole,"James", "Joseph", "j@gmail.com", cAddress);
+		Customer customer = customerService.createCustomer("jj", "1234", crole,"James", "Joseph", "j@gmail.com");
 		RoomType standard = roomTypeService.createRoomType("Standard", "1 master bedroom"
 				, "img/s.jpg", 300.00, hotel);
 		RoomType king = roomTypeService.createRoomType("King", "2 master bedroom"
@@ -74,9 +74,9 @@ public class HotelbookingApplication implements CommandLineRunner {
 		Room r2 = roomService.createRoom(101, true, hotel, king);
 		Room r3 = roomService.createRoom(102, true, hotel, standard);
 
-		Payment payment = paymentService.createPayment(customer, 123123123878976L, new Date(2021, 9, 2), 1000.0);
-		bookingService.createBooking(new Date(2021, 9, 1), new Date(2021, 9, 4)
-				                   , customer, Arrays.asList(r1, r2, r3), payment);
+//		Payment payment = paymentService.createPayment(customer, 123123123878976L, new Date(2021, 9, 2), 1000.0);
+//		bookingService.createBooking(new Date(2021, 9, 1), new Date(2021, 9, 4)
+//				                   , customer, Arrays.asList(r1, r2, r3), payment);
 
 
 	}

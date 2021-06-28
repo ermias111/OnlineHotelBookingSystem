@@ -16,8 +16,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer createCustomer(String username, String password, Role role, String firstname, String lastname, String email, Address address){
-        return customerRepository.save(new Customer(username, password, role, firstname,lastname,email, address));
+    public Customer createCustomer(String username, String password, Role role, String firstname, String lastname, String email){
+        return customerRepository.save(new Customer(username, password, role, firstname,lastname,email));
     }
 
 

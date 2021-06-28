@@ -87,7 +87,7 @@ public class RoomService {
 
 
     /**
-     * Free room after the customer check out
+     * Free room after the customer leaves the hotel
      * @param roomId
      */
     @Transactional

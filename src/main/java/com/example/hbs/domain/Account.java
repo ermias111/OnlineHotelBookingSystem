@@ -3,9 +3,7 @@ package com.example.hbs.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -24,7 +22,7 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "roleId")
-    private Role roles;
+    private Role role;
 
     @Temporal(TemporalType.DATE)
     private Date created_at;
@@ -43,17 +41,17 @@ public class Account {
         this.username = username;
         this.password = password;
 //        this.roles = Arrays.asList(role);
-//        this.created_at = new Date();
-//        this.last_update = new Date();
+        this.created_at = new Date(System.currentTimeMillis());
+        this.last_update = new Date(System.currentTimeMillis());
     }
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "account_role", joinColumns
-            = @JoinColumn(name = "account_id",
-            referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id",
-                    referencedColumnName = "id"))
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "account_role", joinColumns
+//            = @JoinColumn(name = "account_id",
+//            referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id",
+//                    referencedColumnName = "id"))
 
 
     public Integer getId() {
@@ -96,12 +94,12 @@ public class Account {
         this.last_update = last_update;
     }
 
-    public Role getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Role roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
 
