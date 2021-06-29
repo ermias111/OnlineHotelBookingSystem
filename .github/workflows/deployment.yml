@@ -5,7 +5,7 @@ name: deployment
 
 on:
   push:
-    branches: [ master ]
+    branches: [ v.01 ]
 
 jobs:
   build:
