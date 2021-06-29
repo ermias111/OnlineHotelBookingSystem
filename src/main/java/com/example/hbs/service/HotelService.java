@@ -41,7 +41,7 @@ public class HotelService  {
 
         // if no hotels available
         if(hotels.size() == 0){
-            throw new RuntimeException("No hotels available with this location");
+            throw new IllegalStateException("No hotels available with this location");
         }
 
         return hotels;
