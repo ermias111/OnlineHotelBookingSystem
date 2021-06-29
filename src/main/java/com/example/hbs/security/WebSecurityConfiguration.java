@@ -27,8 +27,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Entry points
         http.authorizeRequests()
-                .antMatchers("/accounts/signup/hotel").permitAll()
+                .antMatchers("/", "/index", "/css/**", "/js/**").permitAll()
+                .antMatchers("/accounts/signup/**").permitAll()
                 .antMatchers("/accounts/signin").permitAll()
+                .antMatchers("/rooms/**").permitAll()
+                .antMatchers("/roomTypes/**").permitAll()
+                .antMatchers("/hotels/**").permitAll()
                 // Disallow everything else..
                 .anyRequest().authenticated()
                 .and()
