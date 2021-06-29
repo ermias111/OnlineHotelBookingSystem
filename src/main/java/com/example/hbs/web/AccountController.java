@@ -49,7 +49,7 @@ public class AccountController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('hotel')")
+    @PreAuthorize("hasAuthority('Admin')")
     public List<Account> getAllUsers() {
         return accountService.getAll();
     }
