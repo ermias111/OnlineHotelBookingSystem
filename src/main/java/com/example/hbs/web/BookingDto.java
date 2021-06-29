@@ -1,10 +1,10 @@
-package com.example.hbs.others;
+package com.example.hbs.web;
 
 import com.example.hbs.domain.Customer;
 
 import java.util.Date;
 
-public class BookingForm {
+public class BookingDto {
     private Integer roomTypeId;
     private Integer numberOfRooms;
     private Integer customerId;
@@ -13,9 +13,9 @@ public class BookingForm {
     private Long cardNum;
     private Date paymentDate;
 
-    public BookingForm(Integer roomTypeId, Integer numberOfRooms,
-                       Integer customerId, Date checkIn, Date checkOut,
-                       Long cardNum, Date paymentDate) {
+    public BookingDto(Integer roomTypeId, Integer numberOfRooms,
+                      Integer customerId, Date checkIn, Date checkOut,
+                      Long cardNum, Date paymentDate) {
         this.roomTypeId = roomTypeId;
         this.numberOfRooms = numberOfRooms;
         this.customerId = customerId;

@@ -1,6 +1,9 @@
 package com.example.hbs.domain;
 
+import com.example.hbs.service.AccountService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 
@@ -10,12 +13,14 @@ import java.util.Date;
 @Table(name = "account")
 public class Account {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private Integer id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "password")
@@ -43,8 +48,8 @@ public class Account {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.created_at = new Date(System.currentTimeMillis());
-        this.last_update = new Date(System.currentTimeMillis());
+        this.created_at = new java.sql.Timestamp(System.currentTimeMillis());
+        this.last_update = new java.sql.Timestamp(System.currentTimeMillis());
 
     }
 
