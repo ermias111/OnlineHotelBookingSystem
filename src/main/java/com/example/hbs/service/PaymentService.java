@@ -17,7 +17,7 @@ public class PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
-    public Payment createPayment(Customer cardHolder, Long cardNum, Date paymentDate, Double paymentAmount){
+    public Payment createPayment(Customer cardHolder, String cardNum, Date paymentDate, Double paymentAmount){
         return paymentRepository.save(new Payment(cardHolder, cardNum, paymentDate, paymentAmount));
     }
 

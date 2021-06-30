@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "account")
@@ -99,5 +100,35 @@ public class Account {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(id, account.id) &&
+                Objects.equals(username, account.username) &&
+                Objects.equals(password, account.password) &&
+                Objects.equals(role, account.role) &&
+                Objects.equals(created_at, account.created_at) &&
+                Objects.equals(last_update, account.last_update);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, role, created_at, last_update);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", created_at=" + created_at +
+                ", last_update=" + last_update +
+                '}';
     }
 }
