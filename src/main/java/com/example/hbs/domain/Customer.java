@@ -2,11 +2,11 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Customer extends Account implements Serializable{
+
     @Column
     private String firstname;
 
@@ -26,11 +26,25 @@ public class Customer extends Account implements Serializable{
     public Customer() {
     }
 
-    public Customer(String firstname, String lastname, String email) {
+    public Customer(String firstname, String lastname, String email, Address address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-//        this.address = address;
+        this.address = address;
+    }
+
+    public Customer(String username, String password, Role role, String firstname, String lastname) {
+        super(username, password, role);
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
+    public Customer(String username, String password, Role role, String firstname, String lastname, String email, Address address) {
+        super(username, password, role);
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.address = address;
     }
 
     public Customer(String username, String password, Role role, String firstname, String lastname, String email) {
@@ -39,6 +53,7 @@ public class Customer extends Account implements Serializable{
         this.lastname = lastname;
         this.email = email;
     }
+
 
     public String getFirstname() {
         return firstname;
@@ -72,19 +87,11 @@ public class Customer extends Account implements Serializable{
         this.address = address;
     }
 
-//    public List<Booking> getBookings() {
-//        return bookings;
-//    }
-//
-//    public void setBookings(List<Booking> bookings) {
-//        this.bookings = bookings;
-//    }
-
     @Override
     public String toString() {
         return "Customer{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                "firstName='" + firstname + '\'' +
+                ", lastName='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", address=" + address +
                 '}';
