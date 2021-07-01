@@ -1,7 +1,5 @@
 package com.example.hbs.web;
 
-import com.example.hbs.domain.Customer;
-
 import java.util.Date;
 
 public class BookingDto {
@@ -10,12 +8,12 @@ public class BookingDto {
     private Integer customerId;
     private Date checkIn;
     private Date checkOut;
-    private Long cardNum;
+    private String cardNum;
     private Date paymentDate;
 
     public BookingDto(Integer roomTypeId, Integer numberOfRooms,
                       Integer customerId, Date checkIn, Date checkOut,
-                      Long cardNum, Date paymentDate) {
+                      String cardNum, Date paymentDate) {
         this.roomTypeId = roomTypeId;
         this.numberOfRooms = numberOfRooms;
         this.customerId = customerId;
@@ -65,11 +63,11 @@ public class BookingDto {
         this.checkOut = checkOut;
     }
 
-    public Long getCardNum() {
+    public String getCardNum() {
         return cardNum;
     }
 
-    public void setCardNum(Long cardNum) {
+    public void setCardNum(String cardNum) {
         this.cardNum = cardNum;
     }
 

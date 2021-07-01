@@ -13,4 +13,6 @@ public interface BookingRepository extends CrudRepository<Booking,Integer> {
     List<Booking> findByCustomerId(Integer customerId);
 
     List<Booking> findByRooms_HotelId(Integer hotelId);
+
+
 }

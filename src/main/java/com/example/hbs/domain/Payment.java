@@ -16,7 +16,7 @@ public class Payment implements Serializable {
     private Customer cardHolder;
 
     @Column
-    private Long cardNum;
+    private String cardNum;
 
     @Column
     @Temporal(TemporalType.DATE)
@@ -27,7 +27,7 @@ public class Payment implements Serializable {
 
     public Payment(){}
 
-    public Payment(Customer cardHolder, Long cardNum, Date paymentDate, Double paymentAmount) {
+    public Payment(Customer cardHolder, String cardNum, Date paymentDate, Double paymentAmount) {
         this.cardHolder = cardHolder;
         this.cardNum = cardNum;
         this.paymentDate = paymentDate;
@@ -63,11 +63,11 @@ public class Payment implements Serializable {
         this.cardHolder = cardHolder;
     }
 
-    public Long getCardNum() {
+    public String getCardNum() {
         return cardNum;
     }
 
-    public void setCardNum(Long cardNum) {
+    public void setCardNum(String cardNum) {
         this.cardNum = cardNum;
     }
 

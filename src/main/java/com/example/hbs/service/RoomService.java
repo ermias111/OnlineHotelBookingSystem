@@ -45,7 +45,7 @@ public class RoomService {
      * @param roomTypeId
      */
     public List<Room> getFreeRoomAndBook(Integer roomTypeId, Integer numberOfRooms, Integer customerId
-            , Date checkIn, Date checkOut, Long cardNum, Date paymentDate){
+            , Date checkIn, Date checkOut, String cardNum, Date paymentDate){
         List<Room> rooms = roomRepository.findByRoomTypeIdAndVacantTrue(roomTypeId);
         if(rooms.size() == 0){
             throw new RuntimeException("All rooms with this type are reserved");
