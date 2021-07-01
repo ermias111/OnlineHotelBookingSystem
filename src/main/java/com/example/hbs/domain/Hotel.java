@@ -17,7 +17,7 @@ public class Hotel extends Account implements Serializable {
     @Column
     private String photoUrl;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId")
     private Address address;
     
@@ -47,6 +47,14 @@ public class Hotel extends Account implements Serializable {
 //        this.address = address;
 //        this.roomTypes = roomTypes;
 //    }
+
+    public Hotel(String username, String password, Role role, String name, String description) {
+        super(username, password, role);
+        this.name = name;
+        this.description = description;
+//        this.photoUrl = photoUrl;
+//        this.address = address;
+    }
 
     public Hotel(String username, String password, Role role, String name, String description, String photoUrl, Address address) {
         super(username, password, role);

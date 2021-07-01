@@ -1,4 +1,4 @@
-package com.example.hbs.Controller;
+package com.example.hbs.web;
 
 import com.example.hbs.domain.Hotel;
 import com.example.hbs.service.HotelService;

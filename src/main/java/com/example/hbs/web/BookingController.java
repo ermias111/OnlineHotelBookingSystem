@@ -1,7 +1,7 @@
-package com.example.hbs.Controller;
+package com.example.hbs.web;
 
 import com.example.hbs.domain.Room;
-import com.example.hbs.others.BookingForm;
+import com.example.hbs.web.BookingDto;
 import com.example.hbs.service.BookingService;
 import com.example.hbs.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,14 @@ public class BookingController {
     }
 
     @PostMapping(path = "/book")
-    public List<Room> setBooking(@RequestBody BookingForm bookingForm){
+    public List<Room> setBooking(@RequestBody BookingDto bookingDto){
         return roomService.getFreeRoomAndBook(
-                    bookingForm.getRoomTypeId(),
-                    bookingForm.getNumberOfRooms(),
-                    bookingForm.getCustomerId(),
-                    bookingForm.getCheckIn(),
-                    bookingForm.getCheckOut(),
-                    bookingForm.getCardNum(),
-                    bookingForm.getPaymentDate());
+                    bookingDto.getRoomTypeId(),
+                    bookingDto.getNumberOfRooms(),
+                    bookingDto.getCustomerId(),
+                    bookingDto.getCheckIn(),
+                    bookingDto.getCheckOut(),
+                    bookingDto.getCardNum(),
+                    bookingDto.getPaymentDate());
     }
 }
