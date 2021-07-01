@@ -39,19 +39,20 @@ public class Customer extends Account implements Serializable{
         this.lastname = lastname;
     }
 
-    public Customer(String username, String password, Role role, String firstname, String lastname, String email, Address address) {
-        super(username, password, role);
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.address = address;
-    }
 
     public Customer(String username, String password, Role role, String firstname, String lastname, String email) {
         super(username, password, role);
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+    }
+
+    public Customer(String username, String password, Role role, String firstname, String lastname, String email, Address address) {
+        super(username, password, role);
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.address = address;
     }
 
 
