@@ -48,6 +48,31 @@ public class HotelService  {
 
     }
 
+    public List<Hotel> getHotelsByAddressCity(String city){
+        List<Hotel> hotels = hotelRepository.findByAddressCity(city);
+
+        // if no hotels available
+        if(hotels.size() == 0){
+            throw new IllegalStateException("No hotels available with this location");
+        }
+
+        return hotels;
+
+    }
+
+    /**
+     *
+     * @param hotelId
+     * @return
+     */
+    public Hotel getHotelById(Integer hotelId){
+        Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(() ->
+                    new IllegalStateException("Hotel doesn't exist")
+                );
+
+        return hotel;
+
+    }
 
 
     /**

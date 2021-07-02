@@ -20,8 +20,8 @@ CREATE TABLE `role` (
 CREATE TABLE `account` (
   `dtype` varchar(31) NOT NULL,
   `account_id` int NOT NULL AUTO_INCREMENT,
-  `created_at` Timestamp DEFAULT NULL,
-  `last_update` Timestamp DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `last_update` date DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `payment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `card_num` bigint DEFAULT NULL,
   `payment_amount` double DEFAULT NULL,
-  `payment_date` DATETIME DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
   `customer_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `payment_account` FOREIGN KEY (`customer_id`) REFERENCES `account` (`account_id`)
@@ -49,9 +49,9 @@ CREATE TABLE `payment` (
 
 CREATE TABLE `booking` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `check_in` DATETIME DEFAULT NULL,
-  `check_out` DATETIME DEFAULT NULL,
-  `created_at` DATETIME DEFAULT NULL,
+  `check_in` date DEFAULT NULL,
+  `check_out` date DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
   `customer_id` int DEFAULT NULL,
   `payment_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
