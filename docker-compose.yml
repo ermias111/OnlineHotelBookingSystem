@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  onlinehotelbookingsystem_hbs-mysql:
+    container_name: hbs_db
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3305:3306
+    networks:
+      - onlinehotelbookingsystem_hbs-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE : hbs
+
+
+  hbs:
+    container_name: hbs_backend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - onlinehotelbookingsystem_hbs-mysql
+    networks:
+      - onlinehotelbookingsystem_hbs-mysql
+    ports:
+      - 8081:8080
+
+
+networks:
+  onlinehotelbookingsystem_hbs-mysql:
+    external: true
+
+    #   hbs:
+    #     # Use a custom driver which takes special options
+    #     driver: custom-driver-2
+
+
