@@ -1,6 +1,7 @@
 package com.example.hbs.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public class Customer extends Account implements Serializable{
     @Column
     private String lastname;
 
+    @Email(message = "Email should be valid")
     @Column
     private String email;
 

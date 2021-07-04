@@ -47,7 +47,7 @@ public class RoomServiceIntegrationTest {
 
     @Test
     public void freeRoom(){
-        Room room = roomService.createRoom(200, true, hotel, standard);
+        Room room = roomService.createRoom(200, false, hotel, standard);
         roomService.freeRoom(room.getId());
         assertThat(room.getVacant(), is(true));
     }
