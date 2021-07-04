@@ -66,6 +66,7 @@ public class BookingControllerTest {
                 new HttpEntity(bookingDto,jwtRequestHelper.withRole("ROLE_CUSTOMER")),
                 Booking.class);
 
+
         assertThat(response.getStatusCode().value(), is(200));
         assertThat(response.getBody().getCustomer().getFirstname(), is("Hais"));
         assertThat(response.getBody().getRooms().get(0).getRoomType().getType(), is("Standard"));

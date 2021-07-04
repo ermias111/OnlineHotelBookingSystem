@@ -1,6 +1,5 @@
 package com.example.hbs.web;
 
-import com.example.hbs.domain.Account;
 import com.example.hbs.domain.Customer;
 import com.example.hbs.domain.Role;
 import com.example.hbs.service.AccountService;
@@ -19,9 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.is;
-
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpMethod.GET;
@@ -86,7 +84,7 @@ public class AccountControllerTest {
 
         ResponseEntity<List<Customer>> response = restTemplate.exchange("/accounts",
                 GET,
-                new HttpEntity(jwtRequestHelper.withRole("Customer")),
+                new HttpEntity(jwtRequestHelper.withRole("Admin")),
                 new ParameterizedTypeReference<List<Customer>>() {});
 
         assertThat(response.getStatusCode().value(), is(200));
