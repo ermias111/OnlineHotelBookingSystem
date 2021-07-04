@@ -1,10 +1,7 @@
 package com.example.hbs.web;
 
 
-import com.example.hbs.domain.Customer;
-import com.example.hbs.domain.Hotel;
-import com.example.hbs.domain.Room;
-import com.example.hbs.domain.RoomType;
+import com.example.hbs.domain.*;
 import com.example.hbs.repo.HotelRepository;
 import com.example.hbs.repo.RoomTypeRepository;
 import com.example.hbs.service.BookingService;
@@ -50,24 +47,28 @@ public class BookingControllerTest {
             2, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
             "8273847293", new Date(System.currentTimeMillis()));
 
-    // FIX THIS
-    Room room = new Room(122, true, new Hotel(),new RoomType());
+    Hotel hotel = new Hotel("HotelHH", "3 star","img/ss", new Address());
+    RoomType roomType = new RoomType("Standard", "4 star", "img/ss", 300.0, hotel);
+    Customer customer = new Customer("Test123", "1234", new Role(), "Hais", "Gwes");
+    Room room = new Room(122, true, hotel, roomType);
+    Booking booking = new Booking(new Date(System.currentTimeMillis())
+                , new Date(System.currentTimeMillis()),
+            customer, Arrays.asList(room), new Payment());
 
 
     @Test
     public void createBooking(){
         when(roomService.getFreeRoomAndBook(bookingDto.getRoomTypeId(), bookingDto.getNumberOfRooms(), bookingDto.getCustomerId(), bookingDto.getCheckIn(),
-                bookingDto.getCheckOut(), bookingDto.getCardNum(), bookingDto.getPaymentDate())).thenReturn(Arrays.asList(room));
+                bookingDto.getCheckOut(), bookingDto.getCardNum(), bookingDto.getPaymentDate())).thenReturn(booking);
 
-        ResponseEntity<List<Room>> response = restTemplate.exchange("/bookings/book",
+        ResponseEntity<Booking> response = restTemplate.exchange("/bookings/book",
                 POST,
-                new HttpEntity(bookingDto,jwtRequestHelper.withRole("Customer")),
-                new ParameterizedTypeReference<List<Room>>() {});
+                new HttpEntity(bookingDto,jwtRequestHelper.withRole("ROLE_CUSTOMER")),
+                Booking.class);
+
 
         assertThat(response.getStatusCode().value(), is(200));
-        assertThat(response.getBody().get(0).getRoomType().getId(), is(bookingDto.getRoomTypeId()));
-//        assertThat(response.getBody().getFirstname(), is(user.getFirstname()));
-//        assertThat(response.getBody().getLastname(), is(user.getLastname()));
-//        assertThat(response.getBody().getRole(), is(user.getRole()));
+        assertThat(response.getBody().getCustomer().getFirstname(), is("Hais"));
+        assertThat(response.getBody().getRooms().get(0).getRoomType().getType(), is("Standard"));
     }
 }
