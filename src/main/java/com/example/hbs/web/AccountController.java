@@ -49,7 +49,7 @@ public class AccountController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('Customer')")
+    @PreAuthorize("hasAuthority('Admin')")
     public List<Account> getAllUsers() {
         return accountService.getAll();
     }

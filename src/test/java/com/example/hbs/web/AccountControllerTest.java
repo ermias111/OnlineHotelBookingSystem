@@ -84,7 +84,7 @@ public class AccountControllerTest {
 
         ResponseEntity<List<Customer>> response = restTemplate.exchange("/accounts",
                 GET,
-                new HttpEntity(jwtRequestHelper.withRole("Customer")),
+                new HttpEntity(jwtRequestHelper.withRole("Admin")),
                 new ParameterizedTypeReference<List<Customer>>() {});
 
         assertThat(response.getStatusCode().value(), is(200));

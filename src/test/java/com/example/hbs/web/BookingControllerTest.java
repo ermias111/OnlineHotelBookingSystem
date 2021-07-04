@@ -61,7 +61,7 @@ public class BookingControllerTest {
 
         ResponseEntity<List<Room>> response = restTemplate.exchange("/bookings/book",
                 POST,
-                new HttpEntity(bookingDto,jwtRequestHelper.withRole("ROLE_CUSTOMER")),
+                new HttpEntity(bookingDto,jwtRequestHelper.withRole("Customer")),
                 new ParameterizedTypeReference<List<Room>>() {});
 
         assertThat(response.getStatusCode().value(), is(200));

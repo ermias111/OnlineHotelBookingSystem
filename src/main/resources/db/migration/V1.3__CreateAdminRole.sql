@@ -1,0 +1,1 @@
+INSERT INTO `role` VALUES (3,'Admin Role','Admin');

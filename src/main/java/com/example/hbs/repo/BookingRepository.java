@@ -16,7 +16,6 @@ public interface BookingRepository extends CrudRepository<Booking,Integer> {
     List<Booking> findByRooms_HotelId(Integer hotelId);
 
     @Override
-    @PreAuthorize("hasAuthority('Hotel')")
     Optional<Booking> findById(Integer integer);
 
     @Override
