@@ -50,7 +50,6 @@ public class BookingControllerTest {
     Hotel hotel = new Hotel("HotelHH", "3 star","img/ss", new Address());
     RoomType roomType = new RoomType("Standard", "4 star", "img/ss", 300.0, hotel);
     Customer customer = new Customer("Test123", "1234", new Role(), "Hais", "Gwes");
-    // FIX THIS
     Room room = new Room(122, true, hotel, roomType);
     Booking booking = new Booking(new Date(System.currentTimeMillis())
                 , new Date(System.currentTimeMillis()),

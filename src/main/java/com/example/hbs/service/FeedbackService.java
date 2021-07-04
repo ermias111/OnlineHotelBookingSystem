@@ -43,10 +43,10 @@ public class FeedbackService {
      * @param customer
      * @param hotel
      */
-    public void createFeedback(String comment, Customer customer, Hotel hotel){
+    public Feedback createFeedback(String comment, Customer customer, Hotel hotel){
         hotelRepository.findById(hotel.getId()).orElseThrow(() ->
                     new RuntimeException("hotel doesn't exist")
                 );
-        feedbackRepository.save(new Feedback(comment, customer, hotel));
+        return feedbackRepository.save(new Feedback(comment, customer, hotel));
     }
 }
