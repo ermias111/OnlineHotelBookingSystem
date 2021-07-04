@@ -1,5 +1,7 @@
 package com.example.hbs.web;
 
+import com.example.hbs.domain.Booking;
+import com.example.hbs.domain.Hotel;
 import com.example.hbs.domain.Room;
 import com.example.hbs.web.BookingDto;
 import com.example.hbs.service.BookingService;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "booking")
+@RequestMapping(path = "/bookings")
 public class BookingController {
     private final BookingService bookingService;
     private final RoomService roomService;
@@ -31,5 +33,10 @@ public class BookingController {
                     bookingDto.getCheckOut(),
                     bookingDto.getCardNum(),
                     bookingDto.getPaymentDate());
+    }
+
+    @GetMapping(path = "{customerId}")
+    public List<Booking> getByCustomerId(@RequestParam Integer customerId){
+        return bookingService.getBookingForACustomer(customerId);
     }
 }

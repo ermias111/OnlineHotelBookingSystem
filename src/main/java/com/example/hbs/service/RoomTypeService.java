@@ -39,4 +39,12 @@ public class RoomTypeService {
     public List<RoomType> getRoomTypesOfAHotel(Integer hotelId){
         return roomTypeRepository.findByHotelId(hotelId);
     }
+
+    public RoomType getRoomTypeById(Integer roomTypeId) {
+        RoomType roomType = roomTypeRepository.findById(roomTypeId).orElseThrow(() ->
+                    new IllegalStateException("room type doesn't exist")
+                );
+
+        return roomType;
+    }
 }

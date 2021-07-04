@@ -84,6 +84,20 @@ public class RoomService {
         );
         room.setVacant(true);
     }
+
+    /**
+     *
+     * @param roomTypeId
+     * @return
+     */
+    public List<Room> getRoomsByRoomTypeId(Integer roomTypeId){
+        roomTypeRepository.findById(roomTypeId).orElseThrow(() ->
+                new IllegalStateException("Room type doesn't exist")
+        );
+
+        return roomRepository.findByRoomTypeIdAndVacantTrue(roomTypeId);
+    }
+
     /**
      * Lookup All Tour packages
      *

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "hotel")
+@RequestMapping(path = "/hotels")
 public class HotelController {
     private HotelService hotelService;
 
@@ -23,5 +23,15 @@ public class HotelController {
     @GetMapping(path = "/findByAddressDistrict")
     public List<Hotel> getByDistrict(@RequestParam String district){
         return hotelService.getHotelsByAddressDistrict(district);
+    }
+
+    @GetMapping(path = "/findByAddressCity")
+    public List<Hotel> getByCity(@RequestParam String city){
+        return hotelService.getHotelsByAddressCity(city);
+    }
+
+    @GetMapping(path = "{hotelId}")
+    public Hotel getById(@RequestParam Integer hotelId){
+        return hotelService.getHotelById(hotelId);
     }
 }

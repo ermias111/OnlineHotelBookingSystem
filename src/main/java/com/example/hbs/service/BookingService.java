@@ -5,6 +5,7 @@ import com.example.hbs.domain.Customer;
 import com.example.hbs.domain.Payment;
 import com.example.hbs.domain.Room;
 import com.example.hbs.repo.BookingRepository;
+import com.example.hbs.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,11 @@ import java.util.List;
 public class BookingService {
 
     private BookingRepository bookingRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    public BookingService(BookingRepository bookingRepository) {
+    public BookingService(BookingRepository bookingRepository, CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
         this.bookingRepository = bookingRepository;
     }
 
@@ -39,7 +42,10 @@ public class BookingService {
      * @return
      */
     public List<Booking> getBookingForACustomer(Integer customerId){
-        //check for customer existence
+
+        customerRepository.findById(customerId).orElseThrow(() ->
+                        new IllegalStateException("Hotel doesn't exist")
+                );
 
         List<Booking> reservations = bookingRepository.findByCustomerId(customerId);
 
