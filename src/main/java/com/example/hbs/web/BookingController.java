@@ -24,7 +24,7 @@ public class BookingController {
     }
 
     @PostMapping(path = "/book")
-    public List<Room> setBooking(@RequestBody BookingDto bookingDto){
+    public Booking setBooking(@RequestBody BookingDto bookingDto){
         return roomService.getFreeRoomAndBook(
                     bookingDto.getRoomTypeId(),
                     bookingDto.getNumberOfRooms(),

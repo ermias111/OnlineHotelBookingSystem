@@ -44,7 +44,7 @@ public class RoomService {
      * book
      * @param roomTypeId
      */
-    public List<Room> getFreeRoomAndBook(Integer roomTypeId, Integer numberOfRooms, Integer customerId
+    public Booking getFreeRoomAndBook(Integer roomTypeId, Integer numberOfRooms, Integer customerId
             , Date checkIn, Date checkOut, String cardNum, Date paymentDate){
         List<Room> rooms = roomRepository.findByRoomTypeIdAndVacantTrue(roomTypeId);
         if(rooms.size() == 0){
@@ -69,8 +69,8 @@ public class RoomService {
         Customer customer = customerRepository.findById(customerId).orElseThrow(() ->
                 new RuntimeException("User not available"));
         Payment payment1 = paymentService.createPayment(customer, cardNum, paymentDate, totalPrice);
-        bookingService.createBooking(checkIn, checkOut, customer, reservedRooms, payment1);
-        return reservedRooms;
+        Booking booking = bookingService.createBooking(checkIn, checkOut, customer, reservedRooms, payment1);
+        return booking;
     }
 
     /**
