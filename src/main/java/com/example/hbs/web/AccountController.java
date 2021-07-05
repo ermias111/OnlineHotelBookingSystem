@@ -10,10 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -77,11 +82,20 @@ public class AccountController {
             throw new IllegalArgumentException("Username is not valid");
 
         }
-        else
-
 
         return accountService.signupH(loginDto.getUsername(), loginDto.getPassword(),
                loginDto.getName(),loginDto.getDescription(),loginDto.getPhotoUrl(), loginDto.getAddress()).orElseThrow(() -> new HttpServerErrorException(HttpStatus.BAD_REQUEST,"User already exists"));
+    }
+
+    @PostMapping("/signup/admin")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Account signupA(@RequestBody @Valid LoginDto loginDto){
+        return accountService.signupA(loginDto.getUsername(), loginDto.getPassword()).orElseThrow(() -> new HttpServerErrorException(HttpStatus.BAD_REQUEST,"User already exists"));
+    }
+
+    @GetMapping("/logout")
+    public String signout(){
+        return "logout";
     }
 
     @GetMapping
