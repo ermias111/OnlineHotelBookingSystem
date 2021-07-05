@@ -23,7 +23,7 @@ public class RoomType {
     @Column
     private Double price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hotelId")
     private Hotel hotel;
 

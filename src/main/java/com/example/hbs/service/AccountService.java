@@ -58,6 +58,7 @@ public class AccountService {
         Optional<Account> user = accountRepository.findByUsername(username);
         if (user.isPresent()) {
             try {
+
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
                 token = Optional.of(jwtProvider.createToken(username, Arrays.asList(user.get().getRole())));
             } catch (AuthenticationException e){
@@ -101,6 +102,18 @@ public class AccountService {
                     description,
                     photoUrl,
                     address)));
+        }
+        return user;
+    }
+
+    public Optional<Admin> signupA(String username, String password) {
+        LOGGER.info("New user attempting to sign in");
+        Optional<Admin> user = Optional.empty();
+        if (!accountRepository.findByUsername(username).isPresent()) {
+            Optional<Role> role = roleRepository.findByRoleName("Admin");
+            user = Optional.of(accountRepository.save(new Admin(username,
+                    passwordEncoder.encode(password),
+                    role.get())));
         }
         return user;
     }
