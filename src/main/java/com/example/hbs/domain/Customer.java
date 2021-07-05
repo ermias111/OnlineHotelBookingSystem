@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 public class Customer extends Account implements Serializable{
@@ -14,8 +16,8 @@ public class Customer extends Account implements Serializable{
     @Column
     private String lastname;
 
-    @Email(message = "Email should be valid")
-    @Column
+    @Email(message = "Email should be valid",regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")
+    @Column(unique = true)
     private String email;
 
     @OneToOne
@@ -79,6 +81,7 @@ public class Customer extends Account implements Serializable{
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 

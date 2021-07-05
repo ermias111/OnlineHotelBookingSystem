@@ -34,15 +34,19 @@ public class AccountService {
 
     private JwtProvider jwtProvider;
 
+    private  CustomerRepository customerRepository;
 
     @Autowired
-    public AccountService(AccountRepository accountRepository, AuthenticationManager authenticationManager, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
+
+    public AccountService(AccountRepository accountRepository, AuthenticationManager authenticationManager, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtProvider jwtProvider, CustomerRepository customerRepository) {
         this.accountRepository = accountRepository;
         this.authenticationManager = authenticationManager;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
+        this.customerRepository = customerRepository;
     }
+
 
 
     /**
@@ -77,6 +81,11 @@ public class AccountService {
     public Optional<Customer> signup(String username, String password, String firstname, String lastname,String email) {
         LOGGER.info("New user attempting to sign in");
         Optional<Customer> user = Optional.empty();
+        Optional<Customer> customer = customerRepository.findByEmail(email);
+        if(customer.isPresent()){
+            throw new IllegalStateException("Email must be unique");
+        }
+
         if (!accountRepository.findByUsername(username).isPresent()) {
             Optional<Role> role = roleRepository.findByRoleName("Customer");
             user = Optional.of(accountRepository.save(new Customer(username,

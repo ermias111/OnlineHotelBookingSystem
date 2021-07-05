@@ -13,7 +13,7 @@ public interface RoomTypeRepository extends CrudRepository<RoomType, Integer> {
     List<RoomType> findByHotelId(Integer hotelId);
 
     @Override
-    @PreAuthorize("hasAuthority('Hotel')")
+//    @PreAuthorize("hasAuthority('Hotel')")
     <S extends RoomType> S save(S entity);
 
     @Override

@@ -17,7 +17,7 @@ public class Hotel extends Account implements Serializable {
     @Column
     private String photoUrl;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "addressId")
     private Address address;
     

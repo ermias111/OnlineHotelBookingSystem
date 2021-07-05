@@ -8,6 +8,8 @@ import com.example.hbs.domain.Role;
 import com.example.hbs.repo.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class CustomerService {
@@ -19,6 +21,7 @@ public class CustomerService {
     }
 
     public Customer createCustomer(String username, String password, Role role, String firstname, String lastname, String email){
+
         return customerRepository.save(new Customer(username, password, role, firstname,lastname,email));
     }
 

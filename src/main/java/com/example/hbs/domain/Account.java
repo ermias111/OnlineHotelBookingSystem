@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import java.util.Date;
 import java.util.Objects;
@@ -21,6 +22,7 @@ public class Account {
     @Column(name = "account_id")
     private Integer id;
 
+    @Size(min = 3,message = "Username must have more than 2 character")
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 

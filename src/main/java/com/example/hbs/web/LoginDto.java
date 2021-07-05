@@ -3,6 +3,9 @@ package com.example.hbs.web;
 import com.example.hbs.domain.Address;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginDto {
     @NotNull
@@ -25,7 +28,19 @@ public class LoginDto {
 
     private Address address;
 
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX
+            = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
+    public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
+    }
+    public static  boolean valid_num(String num,int length){
+        if (num==null)return false;
+        Pattern pattern = Pattern.compile("^\\d{"+length+"}$");
+        Matcher matcher = pattern.matcher(num);
+        return matcher.matches();
+    }
     /**
      * Default constructor
      */
@@ -42,6 +57,7 @@ public class LoginDto {
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+
         this.email = email;
     }
 

@@ -1,6 +1,7 @@
 package com.example.hbs.web;
 
 import com.example.hbs.domain.Account;
+import com.example.hbs.domain.Address;
 import com.example.hbs.domain.Payment;
 import com.example.hbs.service.AccountService;
 import com.example.hbs.service.PaymentService;
@@ -15,6 +16,8 @@ import org.springframework.web.client.HttpServerErrorException;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static com.example.hbs.web.LoginDto.validate;
 
 @RestController
 @RequestMapping("/accounts")
@@ -36,14 +39,47 @@ public class AccountController {
     @PostMapping("/signup/customer")
     @ResponseStatus(HttpStatus.CREATED)
     public Account signup(@RequestBody @Valid LoginDto loginDto){
+
+        if (!validate(loginDto.getEmail()))
+            throw new IllegalArgumentException("Email is not valid");
+        else  if (loginDto.getUsername()==null|| loginDto.getUsername().isEmpty()){
+            throw new IllegalArgumentException("Username is not valid");
+
+        }
+        else
         return accountService.signup(loginDto.getUsername(), loginDto.getPassword(), loginDto.getFirstname(),
-                loginDto.getLastname(),loginDto.getEmail()).orElseThrow(() -> new HttpServerErrorException(HttpStatus.BAD_REQUEST,"User already exists"));
+                loginDto.getLastname(),loginDto.getEmail()).orElseThrow(()
+                -> new HttpServerErrorException(HttpStatus.BAD_REQUEST,"User already exists"));
     }
 
     @PostMapping("/signup/hotel")
     @ResponseStatus(HttpStatus.CREATED)
     public Account signupH(@RequestBody @Valid LoginDto loginDto){
+        if (loginDto.getAddress()!=null){
+            Address address=loginDto.getAddress();
+            if (!LoginDto.valid_num(address.getPhone(),10)){
+                throw new IllegalArgumentException("Phone number is not valid");
+
+            }
+
+            if (!LoginDto.valid_num(address.getPostalCode(),5)){
+                throw new IllegalArgumentException("Postal number  is not valid");
+
+            }
+
+        }  else {
+            throw new IllegalArgumentException("Address information is not valid");
+
+        }
+
         LOGGER.info("address" + loginDto.getAddress());
+        if (loginDto.getUsername()==null|| loginDto.getUsername().isEmpty()){
+            throw new IllegalArgumentException("Username is not valid");
+
+        }
+        else
+
+
         return accountService.signupH(loginDto.getUsername(), loginDto.getPassword(),
                loginDto.getName(),loginDto.getDescription(),loginDto.getPhotoUrl(), loginDto.getAddress()).orElseThrow(() -> new HttpServerErrorException(HttpStatus.BAD_REQUEST,"User already exists"));
     }
