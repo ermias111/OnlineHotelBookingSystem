@@ -33,7 +33,7 @@ public class BookingService {
      * @return
      */
     public Booking createBooking(Date check_in, Date check_out, Customer customer, List<Room> rooms, Payment p){
-        return null;
+        return bookingRepository.save(new Booking(check_in, check_out, customer, rooms, p));
     }
 
     /**

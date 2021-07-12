@@ -19,10 +19,10 @@ public class AccountRepositoryTest {
 
     @Test
     public void testFindByUsername(){
-        Optional<Account> user = repository.findByUsername("hotel");
+        Optional<Account> user = repository.findByUsername("jj");
         assertTrue(user.isPresent());
 
-        user = repository.findByUsername("admin");
-        assertFalse(user.isPresent());
+        user = repository.findByUsername("Admin");
+        assertTrue(user.isPresent());
     }
 }

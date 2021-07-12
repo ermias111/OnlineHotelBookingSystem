@@ -60,27 +60,27 @@ public class AccountController {
     @PostMapping("/signup/hotel")
     @ResponseStatus(HttpStatus.CREATED)
     public Account signupH(@RequestBody @Valid LoginDto loginDto){
-        if (loginDto.getAddress()!=null){
-            Address address=loginDto.getAddress();
-            if (!LoginDto.valid_num(address.getPhone(),10)){
-                throw new IllegalArgumentException("Phone number is not valid");
-
-            }
-
-            if (!LoginDto.valid_num(address.getPostalCode(),5)){
-                throw new IllegalArgumentException("Postal number  is not valid");
-
-            }
-
-        }  else {
-            throw new IllegalArgumentException("Address information is not valid");
-
-        }
+//        if (loginDto.getAddress()!=null){
+//            Address address=loginDto.getAddress();
+//            if (!LoginDto.valid_num(address.getPhone(),10)){
+//                throw new IllegalArgumentException("Phone number is not valid");
+//
+//            }
+//
+//            if (!LoginDto.valid_num(address.getPostalCode(),5)){
+//                throw new IllegalArgumentException("Postal number  is not valid");
+//
+//            }
+//
+//        }
+//        else {
+//            throw new IllegalArgumentException("Address information is not valid");
+//
+//        }
 
         LOGGER.info("address" + loginDto.getAddress());
         if (loginDto.getUsername()==null|| loginDto.getUsername().isEmpty()){
             throw new IllegalArgumentException("Username is not valid");
-
         }
 
         return accountService.signupH(loginDto.getUsername(), loginDto.getPassword(),
