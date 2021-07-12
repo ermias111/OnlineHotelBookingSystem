@@ -1,6 +1,8 @@
 package com.example.hbs.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +24,9 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "roomTypeId")
     private RoomType roomType;
+
+    @OneToMany
+    private List<Booking> bookings = new ArrayList<>();
 
 
     public Room(){}
@@ -71,6 +76,14 @@ public class Room {
 
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void addBookings(List<Booking> bookings) {
+        this.bookings.addAll(bookings);
     }
 
     @Override

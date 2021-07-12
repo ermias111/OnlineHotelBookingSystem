@@ -2,6 +2,7 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,6 +21,13 @@ public class Hotel extends Account implements Serializable {
     @OneToOne
     @JoinColumn(name = "addressId")
     private Address address;
+
+    @OneToMany
+    private List<RoomType> roomTypes = new ArrayList<>();
+
+
+    @OneToMany
+    private List<Feedback> feedbacks = new ArrayList<>();
     
     public  Hotel(){}
 
@@ -94,6 +102,22 @@ public class Hotel extends Account implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<RoomType> getRoomTypes() {
+        return roomTypes;
+    }
+
+    public void addRoomTypes(List<RoomType> roomTypes) {
+        this.roomTypes.addAll(roomTypes);
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks.addAll(feedbacks);
     }
 
     @Override

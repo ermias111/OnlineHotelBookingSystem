@@ -3,6 +3,9 @@ package com.example.hbs.domain;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,8 +27,11 @@ public class Customer extends Account implements Serializable{
     @JoinColumn(name = "addressId")
     private Address address;
 
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-//    private List<Booking> bookings;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Booking> bookings = new ArrayList<>();;
+
+    @OneToMany
+    private List<Feedback> feedbacks = new ArrayList<>();
 
     public Customer() {
     }
@@ -83,6 +89,22 @@ public class Customer extends Account implements Serializable{
     public void setEmail(String email) {
 
         this.email = email;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void addBookings(List<Booking> bookings) {
+        this.bookings.addAll(bookings);
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void addFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks.addAll(feedbacks);
     }
 
     public Address getAddress() {

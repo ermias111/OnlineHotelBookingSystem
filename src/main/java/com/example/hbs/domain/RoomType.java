@@ -1,6 +1,7 @@
 package com.example.hbs.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,8 +28,9 @@ public class RoomType {
     @JoinColumn(name = "hotelId")
     private Hotel hotel;
 
-  //  @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
-  //  private List<Room> rooms;
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+    private List<Room> rooms = new ArrayList<>();
 
     public  RoomType(){}
 
@@ -97,13 +99,13 @@ public class RoomType {
         this.hotel = hotel;
     }
 
-//    public List<Room> getRooms() {
-//        return rooms;
-//    }
-//
-//    public void setRooms(List<Room> rooms) {
-//        this.rooms = rooms;
-//    }
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void addRooms(List<Room> rooms) {
+        this.rooms.addAll(rooms);
+    }
 
     @Override
     public String toString() {
