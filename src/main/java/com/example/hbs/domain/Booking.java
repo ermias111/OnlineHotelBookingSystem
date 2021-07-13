@@ -2,6 +2,8 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -20,11 +22,11 @@ public class Booking implements Serializable {
 
     @Column
     @Temporal(TemporalType.DATE)
-    private Date check_in;
+    private LocalDateTime check_in;
 
     @Column
     @Temporal(TemporalType.DATE)
-    private Date check_out;
+    private LocalDateTime check_out;
 
     @ManyToOne
     @JoinColumn(name = "customerId")
@@ -41,13 +43,19 @@ public class Booking implements Serializable {
     public Booking(){}
 
 
-    public Booking(Date check_in, Date check_out, Customer customer, List<Room> rooms, Payment payment) {
+    public Booking(LocalDateTime check_in, LocalDateTime check_out, Customer customer, List<Room> rooms, Payment payment) {
         this.created_at = new Date(System.currentTimeMillis());
         this.check_in = check_in;
         this.check_out = check_out;
         this.customer = customer;
         this.rooms = rooms;
         this.payment = payment;
+
+        for(Room room: this.rooms){
+            room.addBookings(Arrays.asList(this));
+        }
+
+        this.customer.addBookings(Arrays.asList(this));
     }
 
     public Integer getId() {
@@ -66,19 +74,19 @@ public class Booking implements Serializable {
         this.created_at = created_at;
     }
 
-    public Date getCheck_in() {
+    public LocalDateTime getCheck_in() {
         return check_in;
     }
 
-    public void setCheck_in(Date check_in) {
+    public void setCheck_in(LocalDateTime check_in) {
         this.check_in = check_in;
     }
 
-    public Date getCheck_out() {
+    public LocalDateTime getCheck_out() {
         return check_out;
     }
 
-    public void setCheck_out(Date check_out) {
+    public void setCheck_out(LocalDateTime check_out) {
         this.check_out = check_out;
     }
 
