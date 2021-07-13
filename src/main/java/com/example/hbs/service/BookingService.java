@@ -9,6 +9,7 @@ import com.example.hbs.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class BookingService {
      * @param rooms
      * @return
      */
-    public Booking createBooking(Date check_in, Date check_out, Customer customer, List<Room> rooms, Payment p){
+    public Booking createBooking(LocalDateTime check_in, LocalDateTime check_out, Customer customer, List<Room> rooms, Payment p){
         return bookingRepository.save(new Booking(check_in, check_out, customer, rooms, p));
     }
 

@@ -7,6 +7,7 @@ import com.example.hbs.repo.RoomTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.*;
 @Service
 public class RoomService {
@@ -45,7 +46,7 @@ public class RoomService {
      * @param roomTypeId
      */
     public Booking getFreeRoomAndBook(Integer roomTypeId, Integer numberOfRooms, Integer customerId
-            , Date checkIn, Date checkOut, String cardNum, Date paymentDate){
+            , LocalDateTime checkIn, LocalDateTime checkOut, String cardNum, LocalDateTime paymentDate){
         List<Room> rooms = roomRepository.findByRoomTypeIdAndVacantTrue(roomTypeId);
         if(rooms.size() == 0){
             throw new RuntimeException("All rooms with this type are reserved");

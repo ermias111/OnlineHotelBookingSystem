@@ -1,19 +1,20 @@
 package com.example.hbs.web;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class BookingDto {
     private Integer roomTypeId;
     private Integer numberOfRooms;
     private Integer customerId;
-    private Date checkIn;
-    private Date checkOut;
+    private LocalDateTime checkIn;
+    private LocalDateTime checkOut;
     private String cardNum;
-    private Date paymentDate;
+    private LocalDateTime paymentDate;
 
     public BookingDto(Integer roomTypeId, Integer numberOfRooms,
-                      Integer customerId, Date checkIn, Date checkOut,
-                      String cardNum, Date paymentDate) {
+                      Integer customerId, LocalDateTime checkIn, LocalDateTime checkOut,
+                      String cardNum, LocalDateTime paymentDate) {
         this.roomTypeId = roomTypeId;
         this.numberOfRooms = numberOfRooms;
         this.customerId = customerId;
@@ -47,19 +48,19 @@ public class BookingDto {
         this.customerId = customerId;
     }
 
-    public Date getCheckIn() {
+    public LocalDateTime getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(LocalDateTime checkIn) {
         this.checkIn = checkIn;
     }
 
-    public Date getCheckOut() {
+    public LocalDateTime getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(LocalDateTime checkOut) {
         this.checkOut = checkOut;
     }
 
@@ -71,11 +72,11 @@ public class BookingDto {
         this.cardNum = cardNum;
     }
 
-    public Date getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
     }
 }
