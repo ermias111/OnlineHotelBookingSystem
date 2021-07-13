@@ -2,6 +2,7 @@ package com.example.hbs.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,14 +21,14 @@ public class Payment implements Serializable {
 
     @Column
     @Temporal(TemporalType.DATE)
-    private Date paymentDate;
+    private LocalDateTime paymentDate;
 
     @Column
     private Double paymentAmount;
 
     public Payment(){}
 
-    public Payment(Customer cardHolder, String cardNum, Date paymentDate, Double paymentAmount) {
+    public Payment(Customer cardHolder, String cardNum, LocalDateTime paymentDate, Double paymentAmount) {
         this.cardHolder = cardHolder;
         this.cardNum = cardNum;
         this.paymentDate = paymentDate;
@@ -71,11 +72,11 @@ public class Payment implements Serializable {
         this.cardNum = cardNum;
     }
 
-    public Date getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
     }
 

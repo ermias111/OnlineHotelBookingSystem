@@ -36,6 +36,12 @@ public class Customer extends Account implements Serializable{
     public Customer() {
     }
 
+    public Customer(String firstname, String lastname, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
     public Customer(String firstname, String lastname, String email, Address address) {
         this.firstname = firstname;
         this.lastname = lastname;
