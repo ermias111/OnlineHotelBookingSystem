@@ -6,6 +6,7 @@ import com.example.hbs.domain.Payment;
 import com.example.hbs.repo.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
-    public Payment createPayment(Customer cardHolder, String cardNum, Date paymentDate, Double paymentAmount){
+    public Payment createPayment(Customer cardHolder, String cardNum, LocalDateTime paymentDate, Double paymentAmount){
         return paymentRepository.save(new Payment(cardHolder, cardNum, paymentDate, paymentAmount));
     }
 
